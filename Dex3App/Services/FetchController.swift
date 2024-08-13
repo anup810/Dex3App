@@ -6,17 +6,28 @@
 //
 
 import Foundation
+import CoreData
+
 struct FetchController {
     enum NetworkError: Error{
         case badURL,badResponse, badData
     }
-    //private let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon")!
-    private let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=365")
+    private let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon")!
+    //private let baseURL = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=365")
     
-    func fetchAllPokemon() async throws ->[TempPokemon]{
+    func fetchAllPokemon() async throws ->[TempPokemon]?{
+        if havePokemon(){
+            return nil
+        }
         var allPokemon:[TempPokemon] = []
         
-        guard let fetchURL = baseURL else{
+//        guard let fetchURL = baseURL else{
+//            throw NetworkError.badURL
+//        }
+        var fetchComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        fetchComponents?.queryItems = [URLQueryItem(name: "limit", value: "386")]
+        
+        guard let fetchURL = fetchComponents?.url else {
             throw NetworkError.badURL
         }
        let(data,response) = try await URLSession.shared.data(from: fetchURL)
@@ -48,5 +59,23 @@ struct FetchController {
         let tempPokemon = try JSONDecoder().decode(TempPokemon.self, from: data)
         print("Fetch\(tempPokemon.id): \(tempPokemon.name)")
         return tempPokemon
+    }
+    // to check pokemon already exists in database
+    private func havePokemon() ->Bool {
+        let context = PersistenceController.shared.container.newBackgroundContext() // check to see if we have pokemon
+        let fetchRequest: NSFetchRequest<Pokemon> = Pokemon.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", [1,386]) //fetch the pokemon with id of 1 and 386
+        do{
+            let checkPokemon = try context.fetch(fetchRequest)
+            if checkPokemon.count == 2{
+                return true
+            }
+            
+        }catch{
+            print("Fetch failed :\(error)")
+            return false
+        }
+        return false
+        
     }
 }

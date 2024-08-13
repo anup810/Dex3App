@@ -24,7 +24,7 @@ struct PokemonDetailView: View {
                         .resizable()
                         .scaledToFit()
                         .padding(.top,50)
-                        .offset(y:100)
+                        .offset(y:70)
                         .shadow(color: /*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/, radius: 6)
                     
                 }placeholder: {
