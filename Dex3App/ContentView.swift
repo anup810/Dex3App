@@ -9,20 +9,27 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
-        animation: .default)
-    private var pokedex: FetchedResults<Pokemon>
+        animation: .default) private var pokedex: FetchedResults<Pokemon>
     
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Pokemon.id, ascending: true)],
+        predicate: NSPredicate(format: "favorite = %d",true),
+        animation: .default
+    )private var favorite: FetchedResults<Pokemon>
+    
+    
+    @State var filtredByFavorites = false
     @StateObject private var pokemonVM = PokemonViewModel(controller: FetchController())
     
     var body: some View {
         switch pokemonVM.status {
         case .success:
             NavigationStack {
-                List(pokedex) { pokemon in
+                List(filtredByFavorites ? favorite :pokedex) { pokemon in
                     NavigationLink(value:pokemon) {
                         AsyncImage(url: pokemon.sprite){ image in
                             image
@@ -33,6 +40,11 @@ struct ContentView: View {
                         }
                         .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 100)
                         Text(pokemon.name!.capitalized)
+                        
+                        if pokemon.favorite {
+                            Image(systemName: "star.fill")
+                                .foregroundStyle(.yellow)
+                        }
                     }
                 }.navigationTitle("PokeDex")
                     .navigationDestination(for: Pokemon.self, destination: { pokemon in
@@ -41,7 +53,16 @@ struct ContentView: View {
                     })
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            EditButton()
+                            Button{
+                                withAnimation{
+                                    filtredByFavorites.toggle()
+                                }
+                                
+                            }label: {
+                                Label("Filter By Favorites" ,systemImage: filtredByFavorites ? "star.fill" : "star")
+                            }
+                           
+                            
                         }
                     }
                 
