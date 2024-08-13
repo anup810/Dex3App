@@ -33,6 +33,7 @@ struct ContentView: View {
             }.navigationTitle("PokeDex")
                 .navigationDestination(for: Pokemon.self, destination: { pokemon in
                     PokemonDetailView()
+                        .environmentObject(pokemon)
                 })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
