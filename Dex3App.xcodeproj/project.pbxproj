@@ -14,6 +14,10 @@
 		4A9F7EEE2C4BD8020047601E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F7EED2C4BD8020047601E /* Preview Assets.xcassets */; };
 		4A9F7EF02C4BD8020047601E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F7EEF2C4BD8020047601E /* Persistence.swift */; };
 		4A9F7EF32C4BD8020047601E /* Dex3App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F7EF12C4BD8020047601E /* Dex3App.xcdatamodeld */; };
+		4ADCF5FC2C6AFC1300B8E8B6 /* FetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCF5FB2C6AFC1300B8E8B6 /* FetchController.swift */; };
+		4ADCF6002C6B02C000B8E8B6 /* PokemonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCF5FF2C6B02C000B8E8B6 /* PokemonViewModel.swift */; };
+		4ADCF6022C6B0CC700B8E8B6 /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCF6012C6B0CC700B8E8B6 /* PokemonDetailView.swift */; };
+		4ADCF6042C6B0FEF00B8E8B6 /* SamplePokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCF6032C6B0FEF00B8E8B6 /* SamplePokemon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,10 @@
 		4A9F7EED2C4BD8020047601E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4A9F7EEF2C4BD8020047601E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		4A9F7EF22C4BD8020047601E /* Dex3App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dex3App.xcdatamodel; sourceTree = "<group>"; };
+		4ADCF5FB2C6AFC1300B8E8B6 /* FetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchController.swift; sourceTree = "<group>"; };
+		4ADCF5FF2C6B02C000B8E8B6 /* PokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
+		4ADCF6012C6B0CC700B8E8B6 /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
+		4ADCF6032C6B0FEF00B8E8B6 /* SamplePokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePokemon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +74,12 @@
 		4A9F7EE52C4BD8010047601E /* Dex3App */ = {
 			isa = PBXGroup;
 			children = (
-				4A7F70302C6A637500812815 /* Model */,
-				4A9F7EE62C4BD8010047601E /* Dex3AppApp.swift */,
 				4A9F7EE82C4BD8010047601E /* ContentView.swift */,
+				4ADCF6052C6B113900B8E8B6 /* Views */,
+				4A7F70302C6A637500812815 /* Model */,
+				4ADCF5FE2C6B02AF00B8E8B6 /* ViewModel */,
+				4ADCF5FD2C6B027D00B8E8B6 /* Services */,
+				4A9F7EE62C4BD8010047601E /* Dex3AppApp.swift */,
 				4A9F7EEA2C4BD8020047601E /* Assets.xcassets */,
 				4A9F7EEF2C4BD8020047601E /* Persistence.swift */,
 				4A9F7EEC2C4BD8020047601E /* Preview Content */,
@@ -82,6 +93,31 @@
 				4A9F7EED2C4BD8020047601E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4ADCF5FD2C6B027D00B8E8B6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4ADCF5FB2C6AFC1300B8E8B6 /* FetchController.swift */,
+				4ADCF6032C6B0FEF00B8E8B6 /* SamplePokemon.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4ADCF5FE2C6B02AF00B8E8B6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4ADCF5FF2C6B02C000B8E8B6 /* PokemonViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4ADCF6052C6B113900B8E8B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4ADCF6012C6B0CC700B8E8B6 /* PokemonDetailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +191,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9F7EF02C4BD8020047601E /* Persistence.swift in Sources */,
+				4ADCF6022C6B0CC700B8E8B6 /* PokemonDetailView.swift in Sources */,
 				4A9F7EF32C4BD8020047601E /* Dex3App.xcdatamodeld in Sources */,
+				4ADCF5FC2C6AFC1300B8E8B6 /* FetchController.swift in Sources */,
+				4ADCF6042C6B0FEF00B8E8B6 /* SamplePokemon.swift in Sources */,
+				4ADCF6002C6B02C000B8E8B6 /* PokemonViewModel.swift in Sources */,
 				4A7F70322C6A638E00812815 /* TempPokemon.swift in Sources */,
 				4A9F7EE92C4BD8010047601E /* ContentView.swift in Sources */,
 				4A9F7EE72C4BD8010047601E /* Dex3AppApp.swift in Sources */,
